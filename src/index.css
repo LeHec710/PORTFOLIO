@@ -1,13 +1,291 @@
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+body {
+  --c-light: #f0f0f0;
+  --c-dark: #1c1c1c;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(-45deg, #353535, #2e2e2e, #3d3d3d, #2e2e2e);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+
+  color: var(--c-light);
+  line-height: 140%;
+}
+#root {
+  min-height: 100vh;
+}
+canvas {
+  height: 100vh;
+}
+#root div:first-child > div:first-child {
+  position: fixed;
+}
+#root div:first-child {
+  touch-action: none;
+}
+* {
+  touch-action: auto;
+}
+
+.container {
+	position: absolute;
+	top: 0;
+	right: 0;
+  height: 100vh;
+  width: 100vw;
+  pointer-events: none;
+  /* overflow: hidden; */
+}
+
+.container .wrapper {
+  height: 100%;
+  width: 100%;
+}
+
+.container button {
+  margin-right: 10px;
+  pointer-events: all;
+}
+
+.interactive {
+  pointer-events: all;
+  cursor: pointer;
+}
+
+.glass {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.glass-button {
+  display: inline-block;
+  padding: 24px 32px;
+  border: 0;
+  text-decoration: none;
+  border-radius: 15px;
+  background-color: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(30px);
+  color: rgba(255,255,255,0.8);
+  font-size: 14px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.glass-button:hover {
+  background-color: rgba(255,255,255,0.2);
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+.outlined {
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px;
+}
+
+.fadeIn {
+  opacity: 0;
+  animation: fadeIn 2s ease .5s forwards;
+}
+
+.slideIn {
+  max-height: 0;
+  overflow: hidden;
+  animation: slideIn 2s ease .5s forwards;
+}
+
+@keyframes slideIn {
+  0% {
+      max-height: 0;
+  }
+  100% {
+      max-height: 1000px;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
+}
+
+/* HEADER */
+header {
+  position: fixed;
+  width: 100%;
+  padding-inline: 5vw;
+  height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .main-title {
+  text-transform: uppercase;
+  font-weight: 900;
+  line-height: 32px;
+  letter-spacing: 4px;
+  word-spacing: 6px;
+}
+
+/* INTRO */
+.intro {
+  width: 100%;
+  padding-inline: 5vw;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  transition: transform .5s ease .5s, top .5s ease .5s;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.intro.selected {
+  transform: translateY(0);
+  /* top: 8vh; */
+  top: 0;
+  padding-top: 8vh;
+}
+
+.intro .model {
+  display: none;
+}
+
+.intro .main-title {
+  font-family: 'Unbounded', cursive;
+  font-size: 84px;
+  font-weight: 900;
+  margin-bottom: 10px;
+  line-height: initial;
+  text-transform: uppercase;
+}
+
+.intro .main-description {
+  width: 40vw;
+  font-weight: normal;
+  margin-bottom: 30px;
+}
+
+.intro button {
+  padding: 20px 40px;
+  border: 2px solid var(--c-light);
+  border-radius: 5px;
+  font-size: 16px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  background-color: var(--c-light);
+  color: var(--c-dark);
+  transition: background-color .5s ease, color .5s ease, border .5s ease;
+  cursor: pointer;
+}
+
+.intro button:hover,
+.intro button:active {
+  background-color: transparent;
+  border: 2px solid var(--c-light);
+  color: var(--c-light)
+}
+
+.intro .next {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  font-weight: bold;
+  position: absolute;
+  right: 5vw;
+  transition: letter-spacing 0.5s ease, font-size 0.5s ease;
+  font-size: 24px;
+}
+.intro .next:hover {
+  letter-spacing: 15px;
+  font-size: 28px;
+}
+
+/* DEV */
+
+.projects {
+  width: 100%;
+}
+
+.project {
+  width: 45%;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  padding: 20px 30px;
+  border-radius: 8px;
+  position: initial!important;
+}
+
+@media (max-width: 1280px) {
+  .intro .main-title {
+    font-size: 32px;
+  }
+  .project {
+    width: 100%;
+  }
+  .project div {
+    flex-direction: column;
+  }
+  .project div p {
+    padding-right: 0!important;
+  }
+  .project button {
+    width: 100%;
+  }
+} 
+
+.project div {
+  position: initial!important;
+  display: flex;
+  justify-content: center;
+  align-items: space-around;
+}
+
+.project h3 {
+  font-size: 32px;
+  margin: 10px 0;
+}
+
+.project div p {
+  margin-right: auto;
+  margin-top: 20px;
+  padding-right: 30px;
+}
+.project div img {
+  margin-top: 20px;
+}
+
+.project button {
+  margin-top: 15px;
 }
