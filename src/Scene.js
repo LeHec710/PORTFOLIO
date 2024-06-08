@@ -1,11 +1,11 @@
-import { CameraControls, Center, ContactShadows, Float, OrbitControls, PerspectiveCamera, PresentationControls, Scroll, ScrollControls, SpotLight, SpotLightShadow } from '@react-three/drei';
-import Skater, { Falling } from './models/Skater'
-import { Suspense, useEffect, useRef } from 'react';
-import Models from './Models';
+import { ContactShadows, Environment, Float, PerspectiveCamera, PresentationControls } from '@react-three/drei';
+import { useEffect } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
+import { useModels } from 'hooks/useModels';
 
 const Scene = () => {
     const {camera, gl} = useThree()
+    const {Model, models, currentModel, selected, currentModelRef, cameraRef} = useModels()
     
     useEffect(() => {
         function onWindowResize() {
@@ -36,13 +36,35 @@ const Scene = () => {
                 color={'purple'}
             />
             
-            <PerspectiveCamera makeDefault position={[0,2.5,6]} rotation={[-.3,0,0]} />
+            <PerspectiveCamera ref={cameraRef} makeDefault position={[0,2.5,6]} rotation={[-.3,0,0]} />
 
-            <Models />
-
+            {/* <Models /> */}
+            
+            <group position={[window.innerWidth > 900 ? 1 : 0, 0, -2]}>
+                <PresentationControls
+                    global={true}
+                    enabled={true}
+                    cursor={true}
+                    snap={!selected}
+                    speed={1}
+                    zoom={1}
+                    rotation={[0, 0, 0]}
+                    polar={selected ? [0,0,0] : [-Math.PI / 6, Math.PI / 6]}
+                    azimuth={[-Infinity, Infinity]}
+                    config={{ mass: 1, tension: 170, friction: 26 }}
+                >
+                    <Float
+                        speed={!selected ? 5 : 0}
+                        rotationIntensity={!selected ? 1 : 0}
+                        floatIntensity={!selected ? 1 : 0}
+                        floatingRange={[0, 0.4]}>
+                        <Model url={currentModel.url}  />
+                    </Float>
+                </PresentationControls>
+            </group>    
             <ambientLight />
 
-            <ContactShadows position={[0, -1, 0]} />
+            <ContactShadows position={[0, -1.5, 0]} />
         </>
     )
 }

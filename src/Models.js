@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import Skater from "./models/Skater"
 import { Work } from "./models/Work"
+import { Test } from "./models/Test"
 import { useAnimations } from "hooks/useAnimations"
 import { Float, OrbitControls, PresentationControls, ScrollControls, Select, TransformControls, isWebGL2Available, useGLTF, useScroll } from "@react-three/drei"
 import { useFrame } from "@react-three/fiber"
@@ -170,6 +171,14 @@ const Models = () => {
                         floatIntensity={1}
                         floatingRange={[0, 0.4]}>
                         <Work ref={models.work} scale={1.3} />
+                    </Float>
+
+                    <Float
+                        speed={animations?.test.float ? 5 : 0}
+                        rotationIntensity={animations?.test.float ? 1 : 0}
+                        floatIntensity={1}
+                        floatingRange={[0, 0.4]}>
+                        <Test ref={models.test} scale={1.3} />
                     </Float>
 
                 </PresentationControls>

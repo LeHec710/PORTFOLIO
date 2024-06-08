@@ -10,9 +10,10 @@ export const Animation = ({ children }) => {
     // states
     const skater = createRef()
     const work = createRef()
+    const test = createRef()
     const [animations, setAnimations] = useState(null)
     const [animation, setAnimation] = useState(null)
-    const [models, setModels] = useState({skater, work})
+    const [models, setModels] = useState({skater, work, test})
 
     // models
     const { animations: falling } = useLoader(FBXLoader, '/models/animations/falling.fbx')
@@ -31,6 +32,12 @@ export const Animation = ({ children }) => {
     const { actions: work_landing_actions, names: work_landing_names } = useDreiAnimations(landing, models.work)
     const { actions: work_falling_impact_actions, names: work_falling_impact_names } = useDreiAnimations(falling_impact, models.work)
     const { actions: work_idle_actions, names: work_idle_names } = useDreiAnimations(idle, models.work)
+    
+    // test animations
+    const { actions: test_falling_actions, names: test_falling_names } = useDreiAnimations(falling, models.test)
+    const { actions: test_landing_actions, names: test_landing_names } = useDreiAnimations(landing, models.test)
+    const { actions: test_falling_impact_actions, names: test_falling_impact_names } = useDreiAnimations(falling_impact, models.test)
+    const { actions: test_idle_actions, names: test_idle_names } = useDreiAnimations(idle, models.test)
 
     // init animations
     useEffect(() => {
@@ -50,13 +57,21 @@ export const Animation = ({ children }) => {
                 "landing": work_landing_actions[work_landing_names[0]],
                 "idle": work_idle_actions[work_idle_names[0]],
                 "float": true
+            },
+            "test": {
+                "model": models.test,
+                "falling": test_falling_actions[test_falling_names[0]],
+                "falling_impact": test_falling_impact_actions[test_falling_impact_names[0]],
+                "landing": test_landing_actions[test_landing_names[0]],
+                "idle": test_idle_actions[test_idle_names[0]],
+                "float": true
             }
         })
     }, [
-        skate_falling_actions, skate_falling_names, work_falling_actions, work_falling_names, 
-        skate_falling_impact_actions, skate_falling_impact_names, work_falling_impact_actions, work_falling_impact_names, 
-        skate_landing_actions, skate_landing_names, work_landing_actions, work_landing_names,
-        skate_idle_actions, skate_idle_names, work_idle_actions, work_idle_names,
+        skate_falling_actions, skate_falling_names, work_falling_actions, work_falling_names,  test_falling_actions, test_falling_names,
+        skate_falling_impact_actions, skate_falling_impact_names, work_falling_impact_actions, work_falling_impact_names, test_falling_impact_actions, test_falling_impact_names,
+        skate_landing_actions, skate_landing_names, work_landing_actions, work_landing_names, test_landing_actions, test_landing_names,
+        skate_idle_actions, skate_idle_names, work_idle_actions, work_idle_names, test_idle_actions, test_idle_names,
         models
     ])
 

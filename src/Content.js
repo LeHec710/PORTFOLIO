@@ -18,6 +18,7 @@ const Content = ({ domNodeRef }) => {
     const next = () => {
         const _models = { ...models }
         _models.current === _models.total ? _models.current = 1 : _models.current += 1
+        console.log(_models.current)
         setModels(_models)
         models.list.forEach(name => {
             if (models[name].index === _models.current) {

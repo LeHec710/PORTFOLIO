@@ -26,28 +26,28 @@ body {
 canvas {
   height: 100vh;
 }
-#root div:first-child > div:first-child {
+/* #root div:first-child > div:first-child {
   position: fixed;
-}
-#root div:first-child {
-  touch-action: none;
-}
-* {
-  touch-action: auto;
+} */
+
+.canvas-container {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
 }
 
 .container {
 	position: absolute;
 	top: 0;
 	right: 0;
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
-  pointer-events: none;
+  /* pointer-events: none; */
   /* overflow: hidden; */
 }
 
 .container .wrapper {
-  height: 100%;
+  min-height: 100vh;
   width: 100%;
 }
 
@@ -146,9 +146,12 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 10;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
-header .main-title {
+header .title {
   text-transform: uppercase;
   font-weight: 900;
   line-height: 32px;
@@ -157,12 +160,22 @@ header .main-title {
 }
 
 /* INTRO */
+
+.wrapper.intro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .intro {
   width: 100%;
   padding-inline: 5vw;
-  position: absolute;
+  /* position: absolute;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   transition: transform .5s ease .5s, top .5s ease .5s;
 
@@ -231,7 +244,6 @@ header .main-title {
   letter-spacing: 15px;
   font-size: 28px;
 }
-
 /* DEV */
 
 .projects {
