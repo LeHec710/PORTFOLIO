@@ -23,7 +23,7 @@ services:
       context: .
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.react-app.rule=Host(`localhost`)"
+      - "traefik.http.routers.react-app.rule=Host(`portfolio.hector-bidan.fr`)"
       - "traefik.http.routers.react-app.entrypoints=web"
     depends_on:
       - traefik
