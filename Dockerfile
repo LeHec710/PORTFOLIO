@@ -2,8 +2,8 @@
 FROM node:latest as build-stage
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
 COPY . .
+RUN npm install
 RUN npm run build
 
 # Étape 2: Préparer le serveur Nginx pour servir l'application construite

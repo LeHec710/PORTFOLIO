@@ -1,8 +1,8 @@
-log:
-  level: DEBUG
-
 api:
   insecure: true
+
+log:
+  level: DEBUG
 
 providers:
   docker:
@@ -10,6 +10,14 @@ providers:
 
 entryPoints:
   web:
-    address: ":80"
+    address: ":85"
+
   websecure:
-    address: ":443"
+    address: ":8445"
+
+certificatesResolvers:
+  myresolver:
+    acme:
+      email: hector-bidan@gmail.com
+      storage: /letsencrypt/acme.json
+      tlsChallenge: {}
