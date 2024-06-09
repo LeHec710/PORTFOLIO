@@ -13,13 +13,13 @@ const _models = [
     name: 'Dev web',
     slug: 'dev',
     description: 'Je suis un designer',
-    url: '/models/test_rig.glb',
+    url: '/models/model1.glb',
   },
   {
     slug: 'design',
     name: 'UX/UI Design',
     description: 'Je suis un dev',
-    url: '/models/skater.gltf'
+    url: '/models/model2.glb'
   },
 ]
 
@@ -141,11 +141,10 @@ export const ModelsProvider = ({ children }) => {
 
     if(cameraRef.current && window.innerWidth > 700) {
       gsap.to(cameraRef.current.position, {
-        x: -window.innerWidth / 400,
+        x: -(window.innerWidth / 800),
         duration: 1,
       })
     }
-
 
     const falling = mixer?.clipAction(animations.falling, currentModelRef.current);
     const fallingImpact = mixer?.clipAction(animations.fallingImpact, currentModelRef.current);
@@ -153,6 +152,7 @@ export const ModelsProvider = ({ children }) => {
     const idle = mixer?.clipAction(animations.idle, currentModelRef.current);
 
     // Assurez-vous que toutes les animations précédentes sont arrêtées.
+    if(animations.length <= 0) return
     getUp?.stop();
     idle?.stop();
     fallingImpact?.stop();

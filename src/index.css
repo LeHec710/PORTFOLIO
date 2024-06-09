@@ -13,8 +13,8 @@ body {
   --c-light: #f0f0f0;
   --c-dark: #1c1c1c;
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(-45deg, #353535, #2e2e2e, #3d3d3d, #2e2e2e);
-  background-size: 400% 400%;
+  background: linear-gradient(-45deg, #353535, #2e2e2e, #3d3c3c, #202020);
+  background-size: 500% 500%;
   animation: gradient 15s ease infinite;
 
   color: var(--c-light);
@@ -251,12 +251,16 @@ header .title {
 }
 
 .project {
-  width: 45%;
+  width: 60%;
+  max-width: 1200px;
   margin-top: 20px;
   margin-bottom: 40px;
   padding: 20px 30px;
   border-radius: 8px;
   position: initial!important;
+}
+.project img {
+  width: 60%;
 }
 
 @media (max-width: 1280px) {
@@ -273,6 +277,9 @@ header .title {
     padding-right: 0!important;
   }
   .project button {
+    width: 100%;
+  }
+  .project img {
     width: 100%;
   }
 } 

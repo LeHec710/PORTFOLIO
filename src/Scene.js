@@ -17,6 +17,7 @@ const Scene = () => {
         }
         window.addEventListener('resize', () => onWindowResize())
     }, [gl, camera])
+
     return (
         <>
             <directionalLight
