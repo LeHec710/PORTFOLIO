@@ -8,14 +8,14 @@ services:
       - "--log.level=DEBUG"
       - "--api.insecure=true"
       - "--providers.docker=true"
-      - "--entrypoints.web.address=:85"
-      - "--entrypoints.websecure.address=:8445"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
       - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
       - "--certificatesresolvers.myresolver.acme.email=hector.bidan@gmail.com"
       - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
     ports:
-      - "85:85"
-      - "8445:8445"
+      - "80:80"
+      - "443:443"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "./traefik.yml:/etc/traefik/traefik.yml"

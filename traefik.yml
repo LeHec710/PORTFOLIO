@@ -10,10 +10,10 @@ providers:
 
 entryPoints:
   web:
-    address: ":85"
+    address: ":80"
 
   websecure:
-    address: ":8445"
+    address: ":443"
 
 certificatesResolvers:
   myresolver:
