@@ -12,7 +12,7 @@ services:
     ports:
       - "80:80"
       - "443:443"
-      - "8081:8080"
+      - "8082:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "./traefik.yml:/etc/traefik/traefik.yml"
@@ -23,7 +23,7 @@ services:
       context: .
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.react-app.rule=Host(`portfolio.hector-bidan.fr`)"
+      - "traefik.http.routers.react-app.rule=Host(`localhost`)"
       - "traefik.http.routers.react-app.entrypoints=web"
     depends_on:
       - traefik
