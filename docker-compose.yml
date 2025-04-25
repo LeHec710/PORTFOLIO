@@ -1,28 +1,6 @@
 version: '3.7'
 
 services:
-  traefik:
-    image: traefik:v2.3
-    container_name: traefik
-    command:
-      - "--log.level=DEBUG"
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.websecure.address=:443"
-      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
-      - "--certificatesresolvers.myresolver.acme.email=hector.bidan@gmail.com"
-      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-      - "./traefik.yml:/etc/traefik/traefik.yml"
-      - "./letsencrypt:/letsencrypt"
-    labels:
-      - "traefik.enable=true"
-
   react-app:
     build: .
     container_name: react-portfolio
@@ -33,5 +11,3 @@ services:
       - "traefik.http.routers.react-portfolio-secured.rule=Host(`portfolio.hector-bidan.fr`)"
       - "traefik.http.routers.react-portfolio-secured.entrypoints=websecure"
       - "traefik.http.routers.react-portfolio-secured.tls.certresolver=myresolver"
-    depends_on:
-      - traefik
