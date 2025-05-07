@@ -5,15 +5,13 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.portfolio.rule=Host(`hector-bidan.fr`)"
-      - "traefik.http.routers.portfolio.entrypoints=web,websecure"
+      - "traefik.http.routers.portfolio.entrypoints=websecure"
       - "traefik.http.routers.portfolio.tls=true"
       - "traefik.http.routers.portfolio.tls.certresolver=myresolver"
       - "traefik.http.services.portfolio.loadbalancer.server.port=80"
     networks:
-      - portfolio
       - web
 
 networks:
-  portfolio:
   web:
     external: true

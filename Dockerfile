@@ -1,13 +1,13 @@
-# Étape 1: Construire l'application React
-FROM node:latest as build-stage
+# Étape 1 : build React
+FROM node:20 AS builder
 WORKDIR /app
 COPY package*.json ./
-COPY . .
 RUN npm install
+COPY . .
 RUN npm run build
 
-# Étape 2: Préparer le serveur Nginx pour servir l'application construite
+# Étape 2 : Nginx
 FROM nginx:alpine
-COPY --from=build-stage /app/build /usr/share/nginx/html
+COPY --from=builder /app/build /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
