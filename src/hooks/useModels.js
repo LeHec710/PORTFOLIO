@@ -12,13 +12,13 @@ const _models = [
   {
     name: 'Dev web',
     slug: 'dev',
-    description: 'Je suis un designer',
+    description: 'Lors de mon Master CoDux à Limoges, j’ai développé une approche centrée utilisateur en design d’expérience (UX) et d’interface (UI). Durant deux ans, j’ai appris à concevoir des parcours intuitifs, accessibles et esthétiques, en m’appuyant sur des méthodes de recherche utilisateur, de prototypage et de test. Je veille à allier sens du détail et vision globale pour créer des expériences web efficaces et cohérentes.',
     url: '/models/model1.glb',
   },
   {
     slug: 'design',
     name: 'UX/UI Design',
-    description: 'Je suis un dev',
+    description: 'Développeur web passionné, je conçois et réalise des projets numériques depuis 3 ans en entreprise. Cette expérience m’a permis de renforcer mes compétences techniques tout en cultivant une approche rigoureuse et polyvalente du développement. Je mets cette expertise au service de projets variés, avec pour moteur la passion du code, la curiosité et le goût du travail bien fait.',
     url: '/models/model2.glb'
   },
 ]
@@ -139,7 +139,7 @@ export const ModelsProvider = ({ children }) => {
       scrollTop: $(".wrapper.section").offset().top
     }, 500);
 
-    if(cameraRef.current && window.innerWidth > 700) {
+    if (cameraRef.current && window.innerWidth > 700) {
       gsap.to(cameraRef.current.position, {
         x: -(window.innerWidth / 800),
         duration: 1,
@@ -152,7 +152,7 @@ export const ModelsProvider = ({ children }) => {
     const idle = mixer?.clipAction(animations.idle, currentModelRef.current);
 
     // Assurez-vous que toutes les animations précédentes sont arrêtées.
-    if(animations.length <= 0) return
+    if (animations.length <= 0) return
     getUp?.stop();
     idle?.stop();
     fallingImpact?.stop();
@@ -198,8 +198,8 @@ export const ModelsProvider = ({ children }) => {
   const unselect = () => {
     if (!currentModelRef.current) return;
 
-    
-    if(cameraRef.current && window.innerWidth > 700) {
+
+    if (cameraRef.current && window.innerWidth > 700) {
       gsap.to(cameraRef.current.position, {
         x: 0,
         duration: 1,
